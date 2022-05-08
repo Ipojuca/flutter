@@ -7,38 +7,35 @@ import 'package:projeto2/models/usuario.dart';
 import '../models/country.dart';
 
 List<Projeto> DUMMY_PROJETOS = [
-  Projeto (
-    id: 1,
-    titulo: 'projeto1',
-    prazo: DateTime.now(),
-    descricao: 'descricao do projeto'
-  ),
-  
-  Projeto (
-    id: 2,
-    titulo: 'projeto2',
-    prazo: DateTime.now(),
-    descricao: 'descricao do projeto'
-  ),
-
+  Projeto(
+      id: 1,
+      titulo: 'projeto1',
+      prazo: DateTime.now(),
+      descricao: 'descricao do projeto'),
+  Projeto(
+      id: 2,
+      titulo: 'projeto2',
+      prazo: DateTime.now(),
+      descricao: 'descricao do projeto'),
 ];
 
 List<Tarefa> DUMMY_TAREFAS = [
-  Tarefa (
+  Tarefa(
     id: 1,
-    descricao: 'tarefa1',
+    descricao: 'tarefa1_1',
     usuario: Usuario(id: 1, nome: 'joao'),
   ),
-  
-  Tarefa (
+  Tarefa(
+    id: 1,
+    descricao: 'tarefa1_2',
+    usuario: Usuario(id: 2, nome: 'juca'),
+  ),
+  Tarefa(
     id: 2,
     descricao: 'tarefa2',
     usuario: Usuario(id: 2, nome: 'maria'),
   ),
-
 ];
-
-
 
 const DUMMY_COUNTRIES = const [
   Country(
