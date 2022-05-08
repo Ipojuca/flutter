@@ -18,19 +18,19 @@ class ProjetoDetalheScreen extends StatelessWidget {
 
     final projeto = ModalRoute.of(context)!.settings.arguments as Projeto;
 
-    final projetoItem = DUMMY_TAREFAS.where((tarefas) {
+    final tarefaItem = DUMMY_TAREFAS.where((tarefas) {
       return tarefas.id == projeto.id;
     }).toList();
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(projeto.descricao),
+        title: Text(projeto.titulo),
       ),
       body: ListView.builder(
           //itemCount: countryPlaces.length,
-          itemCount: projetoItem.length,
+          itemCount: tarefaItem.length,
           itemBuilder: (ctx, index) {
-            return TarefaItem(projetoItem[index]);
+            return TarefaItem(tarefaItem[index]);
           }),
     );
   }
