@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import '../models/projeto.dart';
 
 class ProjetoCadastroScreen extends StatefulWidget {
-  void Function(Projeto) onSubmit;
-  ProjetoCadastroScreen(this.onSubmit, {Key? key}) : super(key: key);
+  //void Function(Projeto) onSubmit;
+  //final Projeto projeto;
   @override
   State<ProjetoCadastroScreen> createState() => _ProjetoCadastroScreenState();
 }
@@ -20,9 +20,9 @@ class _ProjetoCadastroScreenState extends State<ProjetoCadastroScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final projeto = ModalRoute.of(context)!.settings.arguments as Projeto;
-    return Container(
-      child: Column(children: <Widget>[
+    //final projeto = ModalRoute.of(context)!.settings.arguments as Projeto;
+    return Scaffold(
+      body: Column(children: <Widget>[
         TextField(
           controller: _projetoControllerTitulo,
           decoration: InputDecoration(labelText: 'Título'),
@@ -46,6 +46,6 @@ class _ProjetoCadastroScreenState extends State<ProjetoCadastroScreen> {
         titulo: _projetoControllerTitulo.text,
         prazo: DateTime.now(),
         descricao: _projetoControllerDescricao.text);
-    widget.onSubmit(novoProjeto);
+    Navigator.pop(context, novoProjeto);
   }
 }

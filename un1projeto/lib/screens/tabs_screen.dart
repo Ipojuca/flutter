@@ -13,11 +13,11 @@ class TabsScreen extends StatefulWidget {
 }
 
 class _TabsScreenState extends State<TabsScreen> {
-  _novoProjeto(Projeto projeto) {
-    setState(() {
-      _projetos.add(projeto);
-    });
-  }
+  // _novoProjeto(Projeto projeto) {
+  //   setState(() {
+  //     _projetos.add(projeto);
+  //   });
+  // }
 
   int _indexSelectedScreen = 0;
 
@@ -27,19 +27,21 @@ class _TabsScreenState extends State<TabsScreen> {
   //   FavoritosScreen()
   // ];
 
-  _selectScreen(int index) {
+  _selectScreen(int index) async {
+    switch (index) {
+      case 0:
+        ProjetosScreen();
+        break;
+      case 1:
+        var result =
+            await Navigator.pushNamed(context, AppRoutes.PROJETO_CADASTRO);
+
+        _projetos.add(result as Projeto);
+        break;
+      default:
+    }
     setState(() {
       _indexSelectedScreen = index;
-      switch (index) {
-        case 0:
-          ProjetosScreen();
-          break;
-        case 1:
-          Navigator.pushNamed(context, AppRoutes.PROJETO_CADASTRO,
-              arguments: {'_novoProjeto': _novoProjeto});
-          break;
-        default:
-      }
     });
   }
 

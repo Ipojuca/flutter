@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         AppRoutes.PLACES_DETAIL: (ctx) => PlaceDetailScreen(),
         AppRoutes.SETTINGS: (ctx) => SettingsScreen(),
         AppRoutes.PROJETO_DETALHE: (ctx) => ProjetoDetalheScreen(),
-        // AppRoutes.PROJETO_CADASTRO: (ctx) => ProjetoCadastroScreen(),
+        AppRoutes.PROJETO_CADASTRO: (ctx) => ProjetoCadastroScreen()
       },
     );
   }
