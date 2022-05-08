@@ -6,4 +6,5 @@ class AppRoutes {
 
   static const PROJETO_LISTA = '/projeto-lista';
   static const PROJETO_DETALHE = '/projeto-detalhe';
+  static const PROJETO_CADASTRO = '/projeto-cadastro';
 }

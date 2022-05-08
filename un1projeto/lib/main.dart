@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'models/projeto.dart';
+import 'screens/projeto_cadastro.dart';
 import 'screens/projeto_detalhe_screen.dart';
 
 import 'screens/countries_places_screen.dart';
@@ -34,6 +36,7 @@ class MyApp extends StatelessWidget {
         AppRoutes.PLACES_DETAIL: (ctx) => PlaceDetailScreen(),
         AppRoutes.SETTINGS: (ctx) => SettingsScreen(),
         AppRoutes.PROJETO_DETALHE: (ctx) => ProjetoDetalheScreen(),
+        // AppRoutes.PROJETO_CADASTRO: (ctx) => ProjetoCadastroScreen(),
       },
     );
   }
