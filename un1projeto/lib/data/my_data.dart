@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:projeto2/models/place.dart';
-import 'package:projeto2/models/projeto.dart';
-import 'package:projeto2/models/tarefa.dart';
-import 'package:projeto2/models/usuario.dart';
+import '../models/place.dart';
+import '../models/projeto.dart';
+import '../models/tarefa.dart';
+import '../models/usuario.dart';
 
 import '../models/country.dart';
 
@@ -20,21 +20,15 @@ List<Projeto> DUMMY_PROJETOS = [
 ];
 
 List<Tarefa> DUMMY_TAREFAS = [
-  Tarefa(
-    id: 1,
-    descricao: 'tarefa1_1',
-    usuario: Usuario(id: 1, nome: 'joao'),
-  ),
-  Tarefa(
-    id: 1,
-    descricao: 'tarefa1_2',
-    usuario: Usuario(id: 2, nome: 'juca'),
-  ),
-  Tarefa(
-    id: 2,
-    descricao: 'tarefa2',
-    usuario: Usuario(id: 2, nome: 'maria'),
-  ),
+  Tarefa(id: 1, descricao: 'tarefa1_1', usuario: DUMMY_USUARIOS[0]),
+  Tarefa(id: 1, descricao: 'tarefa1_2', usuario: DUMMY_USUARIOS[1]),
+  Tarefa(id: 2, descricao: 'tarefa2', usuario: DUMMY_USUARIOS[2]),
+];
+
+List<Usuario> DUMMY_USUARIOS = [
+  Usuario(id: 1, nome: 'joao', email: 'joao@email'),
+  Usuario(id: 2, nome: 'juca', email: 'juca@email'),
+  Usuario(id: 2, nome: 'maria', email: 'maria@email')
 ];
 
 const DUMMY_COUNTRIES = const [

@@ -1,5 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:projeto2/models/projeto.dart';
+import 'package:projeto2/models/screenobj.dart';
+import 'package:projeto2/models/usuario.dart';
 import 'package:projeto2/utils/app_routes.dart';
 
 import '../data/my_data.dart';

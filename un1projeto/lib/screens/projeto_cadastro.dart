@@ -22,6 +22,9 @@ class _ProjetoCadastroScreenState extends State<ProjetoCadastroScreen> {
   Widget build(BuildContext context) {
     //final projeto = ModalRoute.of(context)!.settings.arguments as Projeto;
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Cadastrar Projeto'),
+      ),
       body: Column(children: <Widget>[
         TextField(
           controller: _projetoControllerTitulo,
