@@ -17,7 +17,7 @@ class TarefaCadastroScreen extends StatefulWidget {
 class _TarefaCadastroScreenState extends State<TarefaCadastroScreen> {
   final _tarefaControllerDescricao = TextEditingController();
 
-  String? _UsuarioId;
+  Usuario _usuario = Usuario(id: 0, nome: '', email: '');
   _selecionarUsuario() {
     // setState(() {
     //   usuarioSelecionado = globals.listaUsuariosGlobal[3];
@@ -56,30 +56,47 @@ class _TarefaCadastroScreenState extends State<TarefaCadastroScreen> {
                 itemBuilder: (ctx, index) {
                   //return UsuarioItem(usuarioItem[index]);
                   //return UsuarioItem(DUMMY_USUARIOS[index]);
-                  return UsuarioItem(globals.listaUsuariosGlobal[index]);
+                  //return UsuarioItem(globals.listaUsuariosGlobal[index]);
+                  return Column(
+                    children: <Widget>[
+                      ListTile(
+                        leading: CircleAvatar(
+                          backgroundColor:
+                              Theme.of(context).colorScheme.secondary,
+                          child: Text('${index + 1}'),
+                        ),
+                        title: Text(globals.listaUsuariosGlobal[index].nome),
+                        subtitle:
+                            Text(globals.listaUsuariosGlobal[index].email),
+                        onTap: () {
+                          setState(() {
+                            _usuario = globals.listaUsuariosGlobal[index];
+                          });
+                        },
+                      ),
+                    ],
+                  );
                 },
               ),
             ),
           ),
         ),
         //pegar o usuario que foi clicado
-        Text('Usuario selecionado: ' +
-            globals.listaUsuariosGlobal[globals.listaUsuariosGlobal.length - 1]
-                .nome),
+        Text('Usuario selecionado: ' + _usuario.nome),
 
         ElevatedButton(
-            onPressed: () => salvarTarefa(projeto.id), child: Text('Salvar'))
+            onPressed: () => salvarTarefa(projeto.id, _usuario),
+            child: Text('Salvar'))
       ]),
     );
   }
 
-  salvarTarefa(int id) {
+  salvarTarefa(int id, Usuario _usuarioId) {
     Tarefa novaTarefa = Tarefa(
-        id: id,
-        descricao: _tarefaControllerDescricao.text,
-        usuario: globals.listaUsuariosGlobal[
-            globals.listaUsuariosGlobal.length -
-                2] //pegar o usuario que foi clicado
+        id: id, descricao: _tarefaControllerDescricao.text, usuario: _usuario
+        // usuario: globals.listaUsuariosGlobal[
+        //     globals.listaUsuariosGlobal.length -
+        //         1] //pegar o usuario que foi clicado
         );
     Navigator.pop(context, novaTarefa);
   }
