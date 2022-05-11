@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:f4_sm_counter/screen/PrimaryCounterScreen.dart';
 import 'package:f4_sm_counter/screen/SecondaryCounterScreen.dart';
 import 'package:flutter/material.dart';
@@ -10,13 +12,15 @@ void main() {
 class SMCounter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'State Management Counter',
-      initialRoute: '/',
-      routes: {
-        '/': (context) => PrimaryCounterScreen(),
-        '/secondary-screen': (context) => SecondaryCounterScreen(),
-      },
+    return ChangeNotifierProvider(create: (context) =>Counter(name, description) ),
+      child: MaterialApp(
+        title: 'State Management Counter',
+        initialRoute: '/',
+        routes: {
+          '/': (context) => PrimaryCounterScreen(),
+          '/secondary-screen': (context) => SecondaryCounterScreen(),
+        },
+      ),
     );
   }
 }

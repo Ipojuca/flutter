@@ -1,4 +1,4 @@
-import 'package:f4_sm_counter/models/CounterModel.dart';
+import 'package:f4_sm_counter/model/CounterModel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -26,7 +26,10 @@ class PrimaryCounterScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          final contador = context.read<CounterModel>();
+          contador.add();
+        },
         child: Icon(Icons.add),
       ),
     );

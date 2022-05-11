@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SecondaryCounterScreen extends StatelessWidget {
   @override
@@ -11,6 +12,7 @@ class SecondaryCounterScreen extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Text('Meu Contador Secundário'),
+            Consumer(builder: builder)
             Text(
               'Contador: 0',
               style: TextStyle(fontSize: 25),
