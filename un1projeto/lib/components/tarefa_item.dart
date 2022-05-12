@@ -25,11 +25,12 @@ class TarefaItem extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       elevation: 4,
       margin: const EdgeInsets.all(10),
+      color: Color.fromARGB(255, 238, 229, 248),
       child: Column(
         children: <Widget>[
           Text(
             tarefa.descricao,
-            style: Theme.of(context).textTheme.headline6,
+            style: Theme.of(context).textTheme.bodyLarge,
           ),
           Text(tarefa.usuario.nome)
         ],

@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'screens/projeto_cadastro.dart';
 import 'screens/projeto_detalhe_screen.dart';
 
-import 'screens/countries_places_screen.dart';
-import 'screens/place_detail_screen.dart';
-import 'screens/settings_screen.dart';
 import 'screens/tabs_screen.dart';
 import 'screens/tarefa_cadastro_screen.dart';
 import 'screens/usuario_cadastro_screen.dart';
@@ -33,9 +30,6 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         AppRoutes.HOME: (ctx) => TabsScreen(),
-        AppRoutes.COUNTRY_PLACES: (ctx) => CountryPlacesScreen(),
-        AppRoutes.PLACES_DETAIL: (ctx) => PlaceDetailScreen(),
-        AppRoutes.SETTINGS: (ctx) => SettingsScreen(),
         AppRoutes.PROJETO_DETALHE: (ctx) => ProjetoDetalheScreen(),
         AppRoutes.PROJETO_CADASTRO: (ctx) => ProjetoCadastroScreen(),
         AppRoutes.USUARIO_CADASTRO: (ctx) => UsuarioCadastroScreen(),

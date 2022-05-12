@@ -44,7 +44,9 @@ class _TabsScreenState extends State<TabsScreen> {
       case 2:
         var result =
             await Navigator.pushNamed(context, AppRoutes.USUARIO_CADASTRO);
-        _usuarios.add(result as Usuario);
+        if (result != null) {
+          _usuarios.add(result as Usuario);
+        }
         break;
       default:
     }

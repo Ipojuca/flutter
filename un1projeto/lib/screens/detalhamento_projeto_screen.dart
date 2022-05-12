@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:projeto2/components/place_item.dart';
-import 'package:projeto2/components/tarefa_item.dart';
-import 'package:projeto2/data/my_data.dart';
-import 'package:projeto2/models/country.dart';
-import 'package:projeto2/models/projeto.dart';
+
+import '../components/tarefa_item.dart';
+import '../data/my_data.dart';
+import '../models/projeto.dart';
 
 class DetalhamentoProjetoScreen extends StatelessWidget {
   //Country country;
