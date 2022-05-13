@@ -89,11 +89,11 @@ class _ProjetoCadastroScreenState extends State<ProjetoCadastroScreen> {
                     }),
               ),
             ])),
-        Divider(
-          height: 20,
-        ),
-        ElevatedButton(
-            onPressed: _showDatePicker, child: Text('Prazo Entrega')),
+        // Divider(
+        //   height: 20,
+        // ),
+        // ElevatedButton(
+        //     onPressed: _showDatePicker, child: Text('Prazo Entrega')),
         Divider(
           height: 20,
         ),

@@ -10,19 +10,6 @@ class ProjetosScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // child: GridView(
-      //   padding: const EdgeInsets.all(25),
-      //   gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-      //     maxCrossAxisExtent:
-      //         200, //cada elemento com extenso maxima de 200 pixel
-      //     childAspectRatio: 3 / 2, //proporcao de cada elemento dentro do grid
-      //     crossAxisSpacing: 20, //espacamento no eixo cruzado
-      //     mainAxisSpacing: 20, //espacamento no eixo principal
-      //   ),
-      //   children: DUMMY_PROJETOS.map((projeto) {
-      //     return ProjetoItem(projeto);
-      //   }).toList(),
-      // ),
       child: ListView.builder(
         itemCount: DUMMY_PROJETOS.length, //_projetoLista.length,
         itemBuilder: (context, index) {
@@ -55,7 +42,7 @@ class ProjetosScreen extends StatelessWidget {
                           width: 2,
                           color: projeto.prazo.day >= DateTime.now().day
                               ? Theme.of(context).colorScheme.primary
-                              : Theme.of(context).colorScheme.secondary),
+                              : Theme.of(context).colorScheme.primary),
                     ),
                     margin: EdgeInsets.symmetric(
                       horizontal: 15,
@@ -67,7 +54,7 @@ class ProjetosScreen extends StatelessWidget {
                       style: TextStyle(
                           color: projeto.prazo.day >= DateTime.now().day
                               ? Theme.of(context).colorScheme.primary
-                              : Theme.of(context).colorScheme.secondary),
+                              : Theme.of(context).colorScheme.primary),
                     ),
                   ),
                 ],
