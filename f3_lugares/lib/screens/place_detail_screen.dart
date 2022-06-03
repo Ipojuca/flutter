@@ -1,11 +1,13 @@
 import 'package:f3_lugares/models/place.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class PlaceDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final place = ModalRoute.of(context)?.settings.arguments as Place;
-
+    //final place = ModalRoute.of(context)?.settings.arguments as Place;
+    //final place = Provider.of<Place>(context, listen: false);
+    final place = context.watch<Place>();
     return Scaffold(
       appBar: AppBar(
         title: Text(place.titulo),
@@ -66,6 +68,7 @@ class PlaceDetailScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          place.toggleFavorito();
           Navigator.of(context).pop(place.titulo);
         },
         child: Icon(Icons.star),

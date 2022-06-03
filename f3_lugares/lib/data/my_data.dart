@@ -46,7 +46,7 @@ const DUMMY_COUNTRIES = const [
   ),
 ];
 
-const DUMMY_PLACES = const [
+List<Place> DUMMY_PLACES = [
   Place(
     id: 'p1',
     titulo: 'Praia',
