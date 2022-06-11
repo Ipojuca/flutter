@@ -1,0 +1,87 @@
+using Microsoft.EntityFrameworkCore;
+using un2API.Context;
+using un2API.Models;
+
+var builder = WebApplication.CreateBuilder(args);
+
+var connectString = builder.Configuration.GetConnectionString("Projetos") ?? "Data Source=Projetos.db";
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+//builder.Services.AddDbContext<AppDBContext>(options => options.UseInMemoryDatabase("un2data"));
+builder.Services.AddSqlite<AppDBContext>(connectString);
+
+var app = builder.Build();
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
+app.UseSwagger();
+
+app.MapGet("/", () => "Hello World!");
+
+app.MapGet("/Usuarios", async (AppDBContext dbContext) => await dbContext.Usuarios.ToListAsync());
+
+app.MapGet("/Usuario/{id}", async (int id, AppDBContext dbContext) =>
+        await dbContext.Usuarios.FirstOrDefaultAsync(a => a.Id == id));
+
+app.MapPost("/Usuario", async (Usuario usuario, AppDBContext dbContext) =>
+{
+    dbContext.Usuarios.Add(usuario);
+    await dbContext.SaveChangesAsync();
+    return usuario;
+});
+
+app.MapPut("/Usuario/{id}", async (int id, Usuario cliente, AppDBContext dbContext) =>
+{
+    dbContext.Entry(cliente).State = EntityState.Modified;
+    await dbContext.SaveChangesAsync();
+    return cliente;
+});
+
+app.MapDelete("/Usuario/{id}", async (int id, AppDBContext dbContext) =>
+{
+    var cliente = await dbContext.Usuarios.FirstOrDefaultAsync(a => a.Id == id);
+    if (cliente != null)
+    {
+        dbContext.Remove(cliente);
+        await dbContext.SaveChangesAsync();
+    }
+    return;
+});
+
+app.MapGet("/Projetos", async (AppDBContext dbContext) => await dbContext.Projetos.ToListAsync());
+app.MapGet("/Projeto/{id}", async (int id, AppDBContext dbContext) =>
+        await dbContext.Projetos.FirstOrDefaultAsync(a => a.Id == id));
+
+app.MapPost("/Projeto", async (Projeto projeto, AppDBContext dbContext) =>
+{
+    dbContext.Projetos.Add(projeto);
+    await dbContext.SaveChangesAsync();
+    return projeto;
+});
+
+app.MapPut("/Projeto/{id}", async (int id, Projeto projeto, AppDBContext dbContext) =>
+{
+    dbContext.Entry(projeto).State = EntityState.Modified;
+    await dbContext.SaveChangesAsync();
+    return projeto;
+});
+
+app.MapDelete("/Projeto/{id}", async (int id, AppDBContext dbContext) =>
+{
+    var cliente = await dbContext.Projetos.FirstOrDefaultAsync(a => a.Id == id);
+    if (cliente != null)
+    {
+        dbContext.Remove(cliente);
+        await dbContext.SaveChangesAsync();
+    }
+    return;
+});
+
+
+
+app.UseSwaggerUI();
+app.Run();
+
