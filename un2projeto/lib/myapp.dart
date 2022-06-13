@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:un2projeto/componentes/usuario_form.dart';
-import 'package:un2projeto/controller/usuariocontroller.dart';
-import 'package:un2projeto/pages/home_page.dart';
-import 'package:un2projeto/pages/usuario_page.dart';
 
+import 'componentes/usuario_form.dart';
+import 'controller/projetocontroller.dart';
+import 'controller/tarefacontroller.dart';
+import 'controller/usuariocontroller.dart';
+import 'pages/home_page.dart';
 import 'pages/login_page.dart';
+import 'pages/projeto_cadastro_page.dart';
+import 'pages/projeto_detalhe_page.dart';
+import 'pages/tarefa_cadastro_page.dart';
+import 'pages/usuario_page.dart';
 import 'utils/app_routes.dart';
 
 class MyApp extends StatelessWidget {
@@ -14,8 +19,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => UsuarioController(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => UsuarioController()),
+        ChangeNotifierProvider(create: (_) => ProjetoController()),
+        ChangeNotifierProvider(create: (ctx) => TarefaController()),
+      ],
       child: MaterialApp(
         title: 'Gerenciador de Projetos',
         theme: ThemeData(
@@ -38,10 +47,9 @@ class MyApp extends StatelessWidget {
           AppRoutes.HOME: (ctx) => const HomePage(),
           AppRoutes.USUARIO_PAGE: (ctx) => const UsuarioPage(),
           AppRoutes.USUARIO_FORM: (ctx) => UsuarioForm(),
-
-          // AppRoutes.PROJETO_DETALHE: (ctx) => ProjetoDetalheScreen(),
-          // AppRoutes.PROJETO_CADASTRO: (ctx) => ProjetoCadastroScreen(),
-          // AppRoutes.TAREFA_CADASTRO: (ctx) => TarefaCadastroScreen(),
+          AppRoutes.PROJETO_CADASTRO: (ctx) => const ProjetoCadastroPage(),
+          AppRoutes.PROJETO_DETALHE: (ctx) => const ProjetoDetalhePage(),
+          AppRoutes.TAREFA_CADASTRO: (ctx) => TarefaCadastroPage(),
         },
       ),
     );

@@ -5,6 +5,7 @@ import 'package:un2projeto/controller/usuariocontroller.dart';
 import '../models/usuario.dart';
 
 class UsuarioForm extends StatelessWidget {
+  UsuarioForm({Key? key}) : super(key: key);
   final _usuarioControllerNome = TextEditingController();
   final _usuarioControllerEmail = TextEditingController();
 

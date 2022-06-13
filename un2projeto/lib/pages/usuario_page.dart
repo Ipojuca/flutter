@@ -17,7 +17,6 @@ class _UsuarioPageState extends State<UsuarioPage> {
 
   final _controller = UsuarioController();
 
-  //final provider = Provider.of<Usu>(context);
   int count = 0;
 
   _success() {
@@ -25,20 +24,20 @@ class _UsuarioPageState extends State<UsuarioPage> {
   }
 
   _loading() {
-    return Center(child: CircularProgressIndicator());
+    return const Center(child: CircularProgressIndicator());
   }
 
   _error() {
     return Center(
         child: ElevatedButton(
       onPressed: () {
-        _controller.start();
+        //_controller.start();
       },
       child: const Text('Tentar Novamente'),
     ));
   }
 
-  GerenciaEstado(UsuarioState state) {
+  gerenciaEstado(UsuarioState state) {
     switch (state) {
       case UsuarioState.success:
         return _success();
@@ -58,6 +57,7 @@ class _UsuarioPageState extends State<UsuarioPage> {
 
   @override
   Widget build(BuildContext context) {
+    //final _controller = Provider.of<UsuarioController>(context);
     //final projeto = ModalRoute.of(context)!.settings.arguments as Projeto;
     return Scaffold(
       appBar: AppBar(
@@ -72,48 +72,11 @@ class _UsuarioPageState extends State<UsuarioPage> {
       ),
       body: Column(
         children: <Widget>[
-          // Card(
-          //   shape:
-          //       RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          //   elevation: 4,
-          //   margin: const EdgeInsets.all(10),
-          //   color: const Color.fromARGB(255, 238, 229, 248),
-          //   child: Column(children: <Widget>[
-          //     Padding(
-          //       padding: const EdgeInsets.all(8.0),
-          //       child: TextField(
-          //         controller: _usuarioControllerNome,
-          //         decoration: const InputDecoration(
-          //           labelText: 'Nome',
-          //           border: OutlineInputBorder(),
-          //         ),
-          //       ),
-          //     ),
-          //     Padding(
-          //       padding: const EdgeInsets.all(8.0),
-          //       child: TextField(
-          //         controller: _usuarioControllerEmail,
-          //         decoration: const InputDecoration(
-          //           labelText: 'Email',
-          //           border: OutlineInputBorder(),
-          //         ),
-          //       ),
-          //     ),
-          //   ]),
-          // ),
-          // const Divider(
-          //   height: 20,
-          // ),
-          // ElevatedButton(
-          //     onPressed: salvarUsuario,
-          //     child: const Text(
-          //       'Salvar',
-          //     )),
           Expanded(
               child: AnimatedBuilder(
             animation: _controller.state,
             builder: (context, child) {
-              return GerenciaEstado(_controller.state.value);
+              return gerenciaEstado(_controller.state.value);
             },
           ))
         ],

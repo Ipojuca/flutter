@@ -5,6 +5,7 @@ import '../models/usuario.dart';
 class UsuarioRepository {
   final dio = Dio();
   final url = 'http://10.0.2.2:5025';
+  //final url = 'http://localhost:5025';
 
   Future<List<Usuario>> getUsuarios() async {
     final response = await dio.get(url + '/Usuarios');
@@ -15,18 +16,16 @@ class UsuarioRepository {
   Future<Usuario> addUsuario(Usuario usuario) async {
     final response =
         await dio.post(url + '/Usuario', data: usuarioToJson(usuario));
-    return Usuario.fromJson(response.data); //as List;
-    //list.map((json) => Usuario.fromJson(json)).toList();
+    return Usuario.fromJson(response.data);
   }
 
   Future<Usuario> updateUsuario(Usuario usuario) async {
     final response = await dio.put(url + '/Usuario/${usuario.id}',
         data: usuarioToJson(usuario));
-    return Usuario.fromJson(response.data); //as List;
-    //list.map((json) => Usuario.fromJson(json)).toList();
+    return Usuario.fromJson(response.data);
   }
 
   Future<void> deleteUsuario(int id) async {
-    final response = await dio.delete(url + '/Usuario/$id');
+    await dio.delete(url + '/Usuario/$id');
   }
 }

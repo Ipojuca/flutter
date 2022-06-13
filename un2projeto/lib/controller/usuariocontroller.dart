@@ -17,8 +17,8 @@ class UsuarioController with ChangeNotifier {
     try {
       usuarios = await repository.getUsuarios();
       state.value = UsuarioState.success;
-      notifyListeners();
-    } on Exception catch (e) {
+      //notifyListeners();
+    } on Exception {
       state.value = UsuarioState.error;
     }
   }
@@ -38,8 +38,7 @@ class UsuarioController with ChangeNotifier {
 
   Future deleteUsuario(Usuario usuario) async {
     await repository.deleteUsuario(usuario.id);
-    // ignore: list_remove_unrelated_type
-    usuarios.remove(usuario.id);
+    usuarios.remove(usuario);
     notifyListeners();
   }
 }

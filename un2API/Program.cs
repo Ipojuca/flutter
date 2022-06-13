@@ -80,6 +80,38 @@ app.MapDelete("/Projeto/{id}", async (int id, AppDBContext dbContext) =>
     return;
 });
 
+app.MapGet("/Tarefas", async (AppDBContext dbContext) => await dbContext.Tarefas.ToListAsync());
+
+app.MapGet("/Tarefas/{id}", async (int id, AppDBContext dbContext) =>
+        await dbContext.Tarefas.Where(a => a.ProjetoId == id).ToListAsync());
+
+app.MapGet("/Tarefa/{id}", async (int id, AppDBContext dbContext) =>
+        await dbContext.Tarefas.FirstOrDefaultAsync(a => a.Id == id));
+
+app.MapPost("/Tarefa", async (Tarefa tarefa, AppDBContext dbContext) =>
+{
+    dbContext.Tarefas.Add(tarefa);
+    await dbContext.SaveChangesAsync();
+    return tarefa;
+});
+
+app.MapPut("/Tarefa/{id}", async (int id, Tarefa tarefa, AppDBContext dbContext) =>
+{
+    dbContext.Entry(tarefa).State = EntityState.Modified;
+    await dbContext.SaveChangesAsync();
+    return tarefa;
+});
+
+app.MapDelete("/Tarefa/{id}", async (int id, AppDBContext dbContext) =>
+{
+    var cliente = await dbContext.Tarefas.FirstOrDefaultAsync(a => a.Id == id);
+    if (cliente != null)
+    {
+        dbContext.Remove(cliente);
+        await dbContext.SaveChangesAsync();
+    }
+    return;
+});
 
 
 app.UseSwaggerUI();

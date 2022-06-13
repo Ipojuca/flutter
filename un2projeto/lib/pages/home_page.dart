@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../componentes/projetos_listview.dart';
 import '../utils/app_routes.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,13 +18,13 @@ class _HomePageState extends State<HomePage> {
       // case 0:
       //   ProjetosScreen();
       //   break;
-      // case 1:
-      //   var result =
-      //       await Navigator.pushNamed(context, AppRoutes.PROJETO_CADASTRO);
-      //   if (result != null) {
-      //     _projetos.add(result as Projeto);
-      //   }
-      //   break;
+      case 1:
+        //   var result =
+        await Navigator.pushNamed(context, AppRoutes.PROJETO_CADASTRO);
+        //   if (result != null) {
+        //     _projetos.add(result as Projeto);
+        //   }
+        break;
       case 2:
 //        var result =
         await Navigator.pushNamed(context, AppRoutes.USUARIO_PAGE);
@@ -42,6 +43,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Gerenciador de Projetos')),
+      body: const ProjetosListView(),
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectScreen,
         selectedItemColor: Theme.of(context).colorScheme.secondary,
