@@ -17,7 +17,7 @@ class UsuarioController with ChangeNotifier {
     try {
       usuarios = await repository.getUsuarios();
       state.value = UsuarioState.success;
-      //notifyListeners();
+      notifyListeners();
     } on Exception {
       state.value = UsuarioState.error;
     }

@@ -7,15 +7,20 @@ import '../models/tarefa.dart';
 class TarefaItem extends StatelessWidget {
   final Tarefa tarefa;
 
-  const TarefaItem(this.tarefa);
+  const TarefaItem(this.tarefa, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // cadastrarTarefa(Tarefa tarefa) async {
+    //   var result = await Navigator.pushNamed(context, AppRoutes.TAREFA_CADASTRO,
+    //       arguments: tarefa);
+    // }
+
     return Column(
       children: <Widget>[
         ListTile(
-          title: Text(tarefa.descricao),
-          subtitle: Text(tarefa.usuarioId.toString()),
+          title: Text("Tarefa: " + tarefa.descricao),
+          subtitle: Text("Usuário: " + tarefa.usuario.nome),
           shape: RoundedRectangleBorder(
               side: const BorderSide(
                   color: Color.fromARGB(255, 238, 229, 248), width: 1),
@@ -25,13 +30,13 @@ class TarefaItem extends StatelessWidget {
               width: 100,
               child: Row(
                 children: <Widget>[
-                  IconButton(
-                    onPressed: () {
-                      // updateTarefa(tarefa);
-                    },
-                    icon: const Icon(Icons.edit),
-                    color: Colors.orange,
-                  ),
+                  // IconButton(
+                  //   onPressed: () {
+                  //     // updateTarefa(tarefa);
+                  //   },
+                  //   icon: const Icon(Icons.edit),
+                  //   color: Colors.orange,
+                  // ),
                   IconButton(
                     onPressed: () {
                       Provider.of<TarefaController>(context, listen: false)

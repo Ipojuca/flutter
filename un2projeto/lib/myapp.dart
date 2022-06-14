@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (ctx) => TarefaController()),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Gerenciador de Projetos',
         theme: ThemeData(
             colorScheme: ThemeData().colorScheme.copyWith(
@@ -49,7 +50,7 @@ class MyApp extends StatelessWidget {
           AppRoutes.USUARIO_FORM: (ctx) => UsuarioForm(),
           AppRoutes.PROJETO_CADASTRO: (ctx) => const ProjetoCadastroPage(),
           AppRoutes.PROJETO_DETALHE: (ctx) => const ProjetoDetalhePage(),
-          AppRoutes.TAREFA_CADASTRO: (ctx) => TarefaCadastroPage(),
+          AppRoutes.TAREFA_CADASTRO: (ctx) => const TarefaCadastroPage(),
         },
       ),
     );

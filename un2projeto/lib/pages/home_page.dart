@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:un2projeto/models/projeto.dart';
 
 import '../componentes/projetos_listview.dart';
 import '../utils/app_routes.dart';
@@ -20,7 +21,15 @@ class _HomePageState extends State<HomePage> {
       //   break;
       case 1:
         //   var result =
-        await Navigator.pushNamed(context, AppRoutes.PROJETO_CADASTRO);
+        final Projeto projeto = Projeto(
+          id: 0,
+          titulo: '',
+          prazo: DateTime.now(),
+          descricao: '',
+          tarefas: [],
+        );
+        await Navigator.pushNamed(context, AppRoutes.PROJETO_CADASTRO,
+            arguments: projeto);
         //   if (result != null) {
         //     _projetos.add(result as Projeto);
         //   }

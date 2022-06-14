@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:un2projeto/componentes/usuarios_listview.dart';
 import 'package:un2projeto/controller/usuariocontroller.dart';
 import '../models/usuario.dart';
@@ -12,10 +13,10 @@ class UsuarioPage extends StatefulWidget {
 }
 
 class _UsuarioPageState extends State<UsuarioPage> {
-  final _usuarioControllerNome = TextEditingController();
-  final _usuarioControllerEmail = TextEditingController();
+  // final _usuarioControllerNome = TextEditingController();
+  // final _usuarioControllerEmail = TextEditingController();
 
-  final _controller = UsuarioController();
+  //final _controller = UsuarioController();
 
   int count = 0;
 
@@ -50,15 +51,20 @@ class _UsuarioPageState extends State<UsuarioPage> {
   }
 
   @override
-  void initState() {
-    super.initState();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final _controller = Provider.of<UsuarioController>(context, listen: false);
     _controller.start();
   }
+  // void  initState() {
+  //   super.initState();
+  // _controller.start();
+
+  // }
 
   @override
   Widget build(BuildContext context) {
-    //final _controller = Provider.of<UsuarioController>(context);
-    //final projeto = ModalRoute.of(context)!.settings.arguments as Projeto;
+    final _controller = Provider.of<UsuarioController>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Usuários'),
@@ -84,14 +90,15 @@ class _UsuarioPageState extends State<UsuarioPage> {
     );
   }
 
-  salvarUsuario() {
-    Usuario novoUsuario = Usuario(
-        id: 0,
-        nome: _usuarioControllerNome.text,
-        email: _usuarioControllerEmail.text);
-    _controller.addUsuario(novoUsuario);
-    //Navigator.pop(context, novoUsuario);
-  }
+  // salvarUsuario() {
+  //   Usuario novoUsuario = Usuario(
+  //       id: 0,
+  //       nome: _usuarioControllerNome.text,
+  //       email: _usuarioControllerEmail.text);
+  //   Provider.of<UsuarioController>(context, listen: false)
+  //       .addUsuario(novoUsuario);
+  //   //Navigator.pop(context, novoUsuario);
+  // }
 
   void novoUsuario() {
     final usuario = Usuario(id: 0, nome: "", email: "");

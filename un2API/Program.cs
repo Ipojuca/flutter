@@ -71,28 +71,30 @@ app.MapPut("/Projeto/{id}", async (int id, Projeto projeto, AppDBContext dbConte
 
 app.MapDelete("/Projeto/{id}", async (int id, AppDBContext dbContext) =>
 {
-    var cliente = await dbContext.Projetos.FirstOrDefaultAsync(a => a.Id == id);
-    if (cliente != null)
+    var projeto = await dbContext.Projetos.FirstOrDefaultAsync(a => a.Id == id);
+    if (projeto != null)
     {
-        dbContext.Remove(cliente);
+        dbContext.Remove(projeto);
         await dbContext.SaveChangesAsync();
     }
     return;
 });
 
-app.MapGet("/Tarefas", async (AppDBContext dbContext) => await dbContext.Tarefas.ToListAsync());
+app.MapGet("/Tarefas", async (AppDBContext dbContext) => await dbContext.Tarefas.Include(x => x.Usuario).ToListAsync());
 
 app.MapGet("/Tarefas/{id}", async (int id, AppDBContext dbContext) =>
-        await dbContext.Tarefas.Where(a => a.ProjetoId == id).ToListAsync());
+        await dbContext.Tarefas.Include(x => x.Usuario).Where(a => a.ProjetoId == id).ToListAsync());
 
 app.MapGet("/Tarefa/{id}", async (int id, AppDBContext dbContext) =>
-        await dbContext.Tarefas.FirstOrDefaultAsync(a => a.Id == id));
+        await dbContext.Tarefas.Include(x=>x.Usuario).FirstOrDefaultAsync(a => a.Id == id));
 
 app.MapPost("/Tarefa", async (Tarefa tarefa, AppDBContext dbContext) =>
 {
+
     dbContext.Tarefas.Add(tarefa);
     await dbContext.SaveChangesAsync();
-    return tarefa;
+    var novatarefa = await dbContext.Tarefas.Include(x => x.Usuario).FirstOrDefaultAsync(a => a.Id == tarefa.Id);
+    return novatarefa;
 });
 
 app.MapPut("/Tarefa/{id}", async (int id, Tarefa tarefa, AppDBContext dbContext) =>
@@ -104,10 +106,10 @@ app.MapPut("/Tarefa/{id}", async (int id, Tarefa tarefa, AppDBContext dbContext)
 
 app.MapDelete("/Tarefa/{id}", async (int id, AppDBContext dbContext) =>
 {
-    var cliente = await dbContext.Tarefas.FirstOrDefaultAsync(a => a.Id == id);
-    if (cliente != null)
+    var tarefa = await dbContext.Tarefas.FirstOrDefaultAsync(a => a.Id == id);
+    if (tarefa != null)
     {
-        dbContext.Remove(cliente);
+        dbContext.Remove(tarefa);
         await dbContext.SaveChangesAsync();
     }
     return;

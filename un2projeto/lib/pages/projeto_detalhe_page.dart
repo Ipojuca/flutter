@@ -4,7 +4,6 @@ import 'package:un2projeto/controller/tarefacontroller.dart';
 
 import '../componentes/tarefa_item.dart';
 import '../models/projeto.dart';
-import '../models/tarefa.dart';
 import '../utils/app_routes.dart';
 
 class ProjetoDetalhePage extends StatefulWidget {
@@ -27,17 +26,9 @@ class _ProjetoDetalhePageState extends State<ProjetoDetalhePage> {
     //   return tarefas.id == projeto.id;
     // }).toList();
 
-    cadastrarTarefa() async {
-      var result = await Navigator.pushNamed(context, AppRoutes.TAREFA_CADASTRO,
+    cadastrarTarefa() {
+      Navigator.pushNamed(context, AppRoutes.TAREFA_CADASTRO,
           arguments: projeto);
-      // if (result != null) {
-      //   setState(() {
-      //     DUMMY_TAREFAS.add(result as Tarefa);
-      //     tarefaItem = DUMMY_TAREFAS.where((tarefas) {
-      //       return tarefas.id == projeto.id;
-      //     }).toList();
-      //   });
-      //}
     }
 
     return Scaffold(

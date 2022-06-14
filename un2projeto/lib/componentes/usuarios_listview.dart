@@ -18,9 +18,9 @@ class _UsuarioListViewState extends State<UsuarioListView> {
     final _controller = Provider.of<UsuarioController>(context);
     //final _controller = context.watch<UsuarioController>();
 
-    _controller.start();
+    //_controller.start();
 
-    return ListView.builder(
+    return ListView.separated(
       itemCount: _controller.usuarios.length,
       itemBuilder: (ctx, index) {
         return Column(
@@ -32,7 +32,11 @@ class _UsuarioListViewState extends State<UsuarioListView> {
               ),
               title: Text(_controller.usuarios[index].nome),
               subtitle: Text(_controller.usuarios[index].email),
-
+              shape: RoundedRectangleBorder(
+                  side: const BorderSide(
+                      color: Color.fromARGB(255, 238, 229, 248), width: 1),
+                  borderRadius: BorderRadius.circular(5)),
+              tileColor: const Color.fromARGB(255, 238, 229, 248),
               trailing: SizedBox(
                   width: 100,
                   child: Row(
@@ -61,6 +65,11 @@ class _UsuarioListViewState extends State<UsuarioListView> {
               // },
             ),
           ],
+        );
+      },
+      separatorBuilder: (context, index) {
+        return const Divider(
+          height: 10,
         );
       },
     );

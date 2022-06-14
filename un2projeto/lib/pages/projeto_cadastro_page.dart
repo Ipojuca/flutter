@@ -15,28 +15,45 @@ class ProjetoCadastroPage extends StatefulWidget {
 
 class _ProjetoCadastroPageState extends State<ProjetoCadastroPage> {
   final _projetoControllerTitulo = TextEditingController();
-  final _projetoControllerDescricao = TextEditingController();
-  //final _projetoControllerPrazo = TextEditingController();
 
+  final _projetoControllerDescricao = TextEditingController();
+
+  //final _projetoControllerPrazo = TextEditingController();
   DateTime _dataSelecionada = DateTime.now();
+
+  void _loadFormData(Projeto projeto) {
+    if (projeto.id != 0) {
+      _projetoControllerTitulo.text = projeto.titulo;
+      _projetoControllerDescricao.text = projeto.descricao;
+      _dataSelecionada = projeto.prazo;
+    }
+  }
+
+  salvarProjeto(Projeto projeto) {
+    projeto.titulo = _projetoControllerTitulo.text;
+    projeto.descricao = _projetoControllerDescricao.text;
+    projeto.prazo = _dataSelecionada;
+    if (projeto.id == 0) {
+      Provider.of<ProjetoController>(context, listen: false)
+          .addProjeto(projeto);
+    } else {
+      Provider.of<ProjetoController>(context, listen: false)
+          .updateProjeto(projeto);
+    }
+    Navigator.of(context).pop();
+  }
 
   @override
   Widget build(BuildContext context) {
-    salvarProjeto() {
-      Projeto novoProjeto = Projeto(
-          id: 0,
-          titulo: _projetoControllerTitulo.text,
-          prazo: /*DateTime.now(),*/ _dataSelecionada,
-          descricao: _projetoControllerDescricao.text,
-          tarefas: []);
-      Provider.of<ProjetoController>(context, listen: false)
-          .addProjeto(novoProjeto);
-      Navigator.pop(context);
-    }
+    final Projeto projeto =
+        ModalRoute.of(context)!.settings.arguments as Projeto;
+    final title = projeto.id == 0 ? 'Cadastrar Projeto' : 'Alterar Projeto';
+
+    _loadFormData(projeto);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cadastrar Projeto'),
+        title: Text(title),
       ),
       body: Column(children: <Widget>[
         Card(
@@ -66,19 +83,23 @@ class _ProjetoCadastroPageState extends State<ProjetoCadastroPage> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: DateTimeField(
-                    mode: DateTimeFieldPickerMode.date,
-                    decoration: const InputDecoration(
-                        labelText: 'Data de Entrega',
-                        border: OutlineInputBorder()),
-                    selectedDate: _dataSelecionada,
-                    onDateSelected: (DateTime value) {
-                      setState(() {
-                        _dataSelecionada = value;
-                      });
-                    }),
+              StatefulBuilder(
+                builder: (_context, _setState) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: DateTimeField(
+                        mode: DateTimeFieldPickerMode.date,
+                        decoration: const InputDecoration(
+                            labelText: 'Data de Entrega',
+                            border: OutlineInputBorder()),
+                        selectedDate: _dataSelecionada,
+                        onDateSelected: (DateTime value) {
+                          _setState(() {
+                            _dataSelecionada = value;
+                          });
+                        }),
+                  );
+                },
               ),
             ])),
         // Divider(
@@ -91,7 +112,7 @@ class _ProjetoCadastroPageState extends State<ProjetoCadastroPage> {
         ),
         ElevatedButton(
             onPressed: () {
-              salvarProjeto();
+              salvarProjeto(projeto);
             },
             child: const Text('Salvar')),
 

@@ -39,7 +39,7 @@ class ProjetoController with ChangeNotifier {
   Future deleteProjeto(Projeto projeto) async {
     await repository.deleteProjeto(projeto.id);
     // ignore: list_remove_unrelated_type
-    projetos.remove(projeto.id);
+    projetos.remove(projeto);
     notifyListeners();
   }
 }

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using un2API.Context;
 
@@ -10,9 +11,10 @@ using un2API.Context;
 namespace un2API.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    partial class AppDBContextModelSnapshot : ModelSnapshot
+    [Migration("20220613210843_Versao3")]
+    partial class Versao3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.5");
@@ -87,7 +89,7 @@ namespace un2API.Migrations
                         .IsRequired();
 
                     b.HasOne("un2API.Models.Usuario", "Usuario")
-                        .WithMany("Tarefas")
+                        .WithMany()
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -96,11 +98,6 @@ namespace un2API.Migrations
                 });
 
             modelBuilder.Entity("un2API.Models.Projeto", b =>
-                {
-                    b.Navigation("Tarefas");
-                });
-
-            modelBuilder.Entity("un2API.Models.Usuario", b =>
                 {
                     b.Navigation("Tarefas");
                 });

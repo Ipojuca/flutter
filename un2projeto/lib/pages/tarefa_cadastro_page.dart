@@ -7,6 +7,8 @@ import '../models/usuario.dart';
 import '../models/projeto.dart';
 
 class TarefaCadastroPage extends StatefulWidget {
+  const TarefaCadastroPage({Key? key}) : super(key: key);
+
   //void Function(Projeto) onSubmit;
   //final Projeto projeto;
   @override
@@ -26,13 +28,16 @@ class _TarefaCadastroPageState extends State<TarefaCadastroPage> {
 
   @override
   Widget build(BuildContext context) {
-    final _UsuarioController = Provider.of<UsuarioController>(context);
+    final _usuarioController = Provider.of<UsuarioController>(context);
+    if (_usuarioController.state.value != UsuarioState.success) {
+      _usuarioController.start();
+    }
     final projeto = ModalRoute.of(context)!.settings.arguments as Projeto;
 
     //final projeto = ModalRoute.of(context)!.settings.arguments as Projeto;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cadastrar Tarefa'),
+        title: const Text('Cadastrar Tarefa'),
       ),
       body: Column(children: <Widget>[
         Card(
@@ -66,9 +71,9 @@ class _TarefaCadastroPageState extends State<TarefaCadastroPage> {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
             elevation: 4,
             margin: const EdgeInsets.all(10),
-            color: Color.fromARGB(255, 238, 229, 248),
+            color: const Color.fromARGB(255, 238, 229, 248),
             child: const Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(8.0),
                 child: Text('Atribua um usuario a tarefa:'))),
 
         Expanded(
@@ -82,7 +87,7 @@ class _TarefaCadastroPageState extends State<TarefaCadastroPage> {
               child: ListView.builder(
                 //itemCount: usuarioItem.length,
                 //itemCount: DUMMY_USUARIOS.length,
-                itemCount: _UsuarioController.usuarios.length,
+                itemCount: _usuarioController.usuarios.length,
                 itemBuilder: (ctx, index) {
                   //return UsuarioItem(usuarioItem[index]);
                   //return UsuarioItem(DUMMY_USUARIOS[index]);
@@ -94,14 +99,14 @@ class _TarefaCadastroPageState extends State<TarefaCadastroPage> {
                           backgroundColor:
                               Theme.of(context).colorScheme.secondary,
                           child:
-                              Text('${_UsuarioController.usuarios[index].id}'),
+                              Text('${_usuarioController.usuarios[index].id}'),
                         ),
-                        title: Text(_UsuarioController.usuarios[index].nome),
+                        title: Text(_usuarioController.usuarios[index].nome),
                         subtitle:
-                            Text(_UsuarioController.usuarios[index].email),
+                            Text(_usuarioController.usuarios[index].email),
                         onTap: () {
                           setState(() {
-                            _usuario = _UsuarioController.usuarios[index];
+                            _usuario = _usuarioController.usuarios[index];
                           });
                         },
                       ),
@@ -123,15 +128,11 @@ class _TarefaCadastroPageState extends State<TarefaCadastroPage> {
   }
 
   salvarTarefa(int id, Usuario _usuario) {
-    Tarefa novaTarefa = Tarefa(
+    Tarefa novaTarefa = Tarefa.inc(
         id: 0,
         descricao: _tarefaControllerDescricao.text,
         usuarioId: _usuario.id,
-        projetoId: id
-        // usuario: globals.listaUsuariosGlobal[
-        //     globals.listaUsuariosGlobal.length -
-        //         1] //pegar o usuario que foi clicado
-        );
+        projetoId: id);
     Provider.of<TarefaController>(context, listen: false).addTarefa(novaTarefa);
     Navigator.pop(context, novaTarefa);
   }

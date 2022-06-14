@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using un2API.Context;
 
@@ -10,9 +11,10 @@ using un2API.Context;
 namespace un2API.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    partial class AppDBContextModelSnapshot : ModelSnapshot
+    [Migration("20220614012947_Versao4")]
+    partial class Versao4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.5");
@@ -43,6 +45,9 @@ namespace un2API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("CreatedById")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Descricao")
                         .HasColumnType("TEXT");
 
@@ -54,9 +59,9 @@ namespace un2API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProjetoId");
+                    b.HasIndex("CreatedById");
 
-                    b.HasIndex("UsuarioId");
+                    b.HasIndex("ProjetoId");
 
                     b.ToTable("Tarefas");
                 });
@@ -80,15 +85,13 @@ namespace un2API.Migrations
 
             modelBuilder.Entity("un2API.Models.Tarefa", b =>
                 {
+                    b.HasOne("un2API.Models.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("CreatedById");
+
                     b.HasOne("un2API.Models.Projeto", null)
                         .WithMany("Tarefas")
                         .HasForeignKey("ProjetoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("un2API.Models.Usuario", "Usuario")
-                        .WithMany("Tarefas")
-                        .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -96,11 +99,6 @@ namespace un2API.Migrations
                 });
 
             modelBuilder.Entity("un2API.Models.Projeto", b =>
-                {
-                    b.Navigation("Tarefas");
-                });
-
-            modelBuilder.Entity("un2API.Models.Usuario", b =>
                 {
                     b.Navigation("Tarefas");
                 });
