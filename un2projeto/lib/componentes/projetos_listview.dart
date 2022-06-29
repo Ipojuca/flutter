@@ -34,6 +34,7 @@ class _ProjetosListViewState extends State<ProjetosListView> {
     //   default:
     // }
     return ListView.separated(
+      padding: const EdgeInsets.all(15),
       itemCount: _controller.projetos.length,
       itemBuilder: (context, index) {
         final projeto = _controller.projetos[index]; //_projetoLista[index];
@@ -44,9 +45,12 @@ class _ProjetosListViewState extends State<ProjetosListView> {
           },
           shape: RoundedRectangleBorder(
               side: const BorderSide(
-                  color: Color.fromARGB(255, 238, 229, 248), width: 1),
+                  //color: Color.fromARGB(255, 238, 229, 248), width: 1),
+                  color: Color.fromARGB(255, 39, 122, 185),
+                  width: 1),
               borderRadius: BorderRadius.circular(5)),
-          tileColor: const Color.fromARGB(255, 238, 229, 248),
+          //tileColor: const Color.fromARGB(255, 238, 229, 248),
+          tileColor: const Color.fromARGB(255, 255, 255, 255),
           trailing: SizedBox(
               width: 100,
               child: Row(
@@ -57,14 +61,36 @@ class _ProjetosListViewState extends State<ProjetosListView> {
                           arguments: projeto);
                     },
                     icon: const Icon(Icons.edit),
-                    color: Colors.orange,
+                    //color: Colors.orange,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                   IconButton(
                     onPressed: () {
-                      _controller.deleteProjeto(projeto);
+                      showDialog(
+                        context: context,
+                        builder: (ctx) => AlertDialog(
+                          title: const Text('Excluir Projeto'),
+                          content:
+                              const Text('Deseja realmente excluir o projeto?'),
+                          actions: <Widget>[
+                            TextButton(
+                                onPressed: () {
+                                  _controller.deleteProjeto(projeto);
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text('Sim')),
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text('Não')),
+                          ],
+                        ),
+                      );
                     },
                     icon: const Icon(Icons.delete),
-                    color: Colors.red,
+                    //color: Colors.red,
+                    color: const Color.fromARGB(255, 183, 31, 20),
                   ),
                 ],
               )),

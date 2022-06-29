@@ -40,41 +40,61 @@ class _TarefaCadastroPageState extends State<TarefaCadastroPage> {
         title: const Text('Cadastrar Tarefa'),
       ),
       body: Column(children: <Widget>[
-        Card(
+        /*Card(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
             elevation: 4,
             margin: const EdgeInsets.all(10),
             color: const Color.fromARGB(255, 238, 229, 248),
-            child: Column(children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: _tarefaControllerDescricao,
-                  decoration: const InputDecoration(
-                    labelText: 'Descricao da tarefa',
-                    border: OutlineInputBorder(),
+            child:*/
+        Column(children: <Widget>[
+          Padding(
+            //padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.only(
+                top: 20.0, left: 15, right: 15, bottom: 8),
+            child: TextField(
+              controller: _tarefaControllerDescricao,
+              decoration: const InputDecoration(
+                prefixIcon: Align(
+                  widthFactor: 1.0,
+                  heightFactor: 1.0,
+                  child: Icon(
+                    Icons.text_snippet_outlined,
                   ),
                 ),
-              )
-            ])),
-        const Divider(
+                labelText: 'Descricao da tarefa',
+                border: OutlineInputBorder(),
+              ),
+            ),
+          )
+        ]),
+        //),
+        /*const Divider(
           height: 20,
-        ),
+        ),*/
         /*TextField(
           controller: _tarefaControllerDescricao,
           decoration: InputDecoration(labelText: 'Descricao da tarefa'),
         ),*/
 
         Card(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+            /*shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),*/
             elevation: 4,
             margin: const EdgeInsets.all(10),
-            color: const Color.fromARGB(255, 238, 229, 248),
+            //color: Color.fromARGB(255, 115, 183, 242),
+            color: Theme.of(context).colorScheme.primary,
             child: const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text('Atribua um usuario a tarefa:'))),
+              //padding: EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(15.0),
+              child: Text(
+                'Selecione um usuario para a tarefa:',
+                style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+              ),
+            )),
 
         Expanded(
           child: SizedBox(
@@ -99,7 +119,14 @@ class _TarefaCadastroPageState extends State<TarefaCadastroPage> {
                           backgroundColor:
                               Theme.of(context).colorScheme.secondary,
                           child:
-                              Text('${_usuarioController.usuarios[index].id}'),
+                              //Text('${_usuarioController.usuarios[index].id}'),
+                              const ClipRRect(
+                            //child: Image.asset('profile-generic.png'),
+                            child: Icon(
+                              Icons.account_circle,
+                              size: 30,
+                            ),
+                          ),
                         ),
                         title: Text(_usuarioController.usuarios[index].nome),
                         subtitle:
@@ -120,9 +147,25 @@ class _TarefaCadastroPageState extends State<TarefaCadastroPage> {
         //pegar o usuario que foi clicado
         Text('Usuario selecionado: ' + _usuario.nome),
 
-        ElevatedButton(
-            onPressed: () => salvarTarefa(projeto.id, _usuario),
-            child: const Text('Salvar'))
+        SizedBox(
+          width: 110,
+          height: 45,
+          child: Padding(
+            padding:
+                const EdgeInsets.only(top: 0, left: 0, right: 0, bottom: 10),
+            child: ElevatedButton(
+                style: ButtonStyle(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18.0),
+                ))),
+                onPressed: () => salvarTarefa(projeto.id, _usuario),
+                child: const Text('Salvar',
+                    style: TextStyle(
+                      fontSize: 16,
+                    ))),
+          ),
+        )
       ]),
     );
   }
